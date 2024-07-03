@@ -2,6 +2,7 @@
   "name": "gif-manager",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -20,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron:start": "concurrently \"npm:start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron:build": "react-scripts build && electron-builder"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +42,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "electron": "^31.1.0",
+    "electron-builder": "^23.6.0",
+    "wait-on": "^6.0.1"
+  },
+  "build": {
+    "appId": "com.example.gifmanager",
+    "files": [
+      "build/**/*",
+      "main.js",
+      "preload.js"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   }
 }
